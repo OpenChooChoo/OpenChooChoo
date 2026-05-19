@@ -6,3 +6,4 @@ authors.workspace = true
 license.workspace = true
 
 [dependencies]
+sdl3 = { version = "0.18.4", features = ["build-from-source-static", "ash"] }
