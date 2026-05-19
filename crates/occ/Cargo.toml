@@ -6,4 +6,6 @@ authors.workspace = true
 license.workspace = true
 
 [dependencies]
+env_logger.workspace = true
+log.workspace = true
 sdl3 = { version = "0.18.4", features = ["build-from-source-static", "ash"] }

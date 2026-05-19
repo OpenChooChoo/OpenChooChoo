@@ -12,6 +12,8 @@ use crate::game::{Game, GameControl};
 use crate::input::{InputEvent, translate_event};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+
     let sdl_context = sdl3::init()?;
     let video = sdl_context.video()?;
 
@@ -85,5 +87,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn window_size_snapshot(window: &Window) -> ((u32, u32), (u32, u32), f32) {
-    (window.size(), window.size_in_pixels(), window.display_scale())
+    (
+        window.size(),
+        window.size_in_pixels(),
+        window.display_scale(),
+    )
 }

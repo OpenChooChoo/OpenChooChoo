@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = [
-    "crates/occ",
+    "crates/occ", "crates/occ-common",
     "crates/occ-components",
     "crates/occ-render-vk",
     "crates/occ-systems",
@@ -15,3 +15,7 @@ authors = [
     "Kane Rogers-Wong <kane.m.rogers@gmail.com>",
 ]
 license = "MPL-2.0"
+
+[workspace.dependencies]
+env_logger = "0.11"
+log = "0.4"
