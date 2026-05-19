@@ -4,7 +4,7 @@ edition = "2024"
 members = [
     "crates/occ",
     "crates/occ-components",
-    "crates/occ-render",
+    "crates/occ-render-vk",
     "crates/occ-systems",
 ]
 
