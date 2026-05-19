@@ -1,0 +1,17 @@
+[workspace]
+resolver = "3"
+edition = "2024"
+members = [
+    "crates/occ",
+    "crates/occ-components",
+    "crates/occ-render",
+    "crates/occ-systems",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = [
+    "Connor Fitzgerald <connorwadefitzgerald@gmail.com>",
+    "Kane Rogers-Wong <kane.m.rogers@gmail.com>",
+]

@@ -1,0 +1,7 @@
+[package]
+name = "occ-components"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]

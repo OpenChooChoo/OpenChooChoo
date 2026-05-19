@@ -1,0 +1,7 @@
+[package]
+name = "occ-render"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
