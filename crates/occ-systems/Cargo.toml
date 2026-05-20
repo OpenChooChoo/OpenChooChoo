@@ -6,3 +6,9 @@ authors.workspace = true
 license.workspace = true
 
 [dependencies]
+anyhow.workspace = true
+glam.workspace = true
+hecs.workspace = true
+occ-common.workspace = true
+occ-components.workspace = true
+occ-render-vk.workspace = true

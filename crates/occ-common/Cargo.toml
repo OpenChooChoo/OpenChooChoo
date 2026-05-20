@@ -6,3 +6,6 @@ authors.workspace = true
 license.workspace = true
 
 [dependencies]
+glam.workspace = true
+bytemuck.workspace = true
+hecs.workspace = true

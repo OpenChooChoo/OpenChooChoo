@@ -1,14 +1,15 @@
-mod game;
+mod app;
 mod input;
 
 use std::sync::mpsc::{self, TryRecvError};
 use std::thread;
 use std::time::Duration;
 
+use raw_window_handle::{HasDisplayHandle, HasWindowHandle};
 use sdl3::event::{Event, WindowEvent};
 use sdl3::video::Window;
 
-use crate::game::{Game, GameControl};
+use crate::app::{App, AppControl, WindowHandles};
 use crate::input::{InputEvent, translate_event};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -22,23 +23,44 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .position_centered()
         .resizable()
         .high_pixel_density()
+        .vulkan()
         .build()?;
 
     let (mut last_logical, mut last_pixel, mut last_scale) = window_size_snapshot(&window);
+
+    let window_handle = window.window_handle()?.as_raw();
+    let display_handle = window.display_handle()?.as_raw();
+    let handles = WindowHandles {
+        window: window_handle,
+        display: display_handle,
+    };
 
     let (event_tx, event_rx) = mpsc::channel();
     let (control_tx, control_rx) = mpsc::channel();
 
     let game_thread = thread::Builder::new().name("game".into()).spawn(move || {
-        let mut game = Game::new(event_rx, control_tx, last_logical, last_pixel, last_scale);
-        game.run();
+        let mut app = match App::new(
+            event_rx,
+            control_tx,
+            handles,
+            last_logical,
+            last_pixel,
+            last_scale,
+        ) {
+            Ok(app) => app,
+            Err(e) => {
+                log::error!("failed to initialize app: {e:?}");
+                return;
+            }
+        };
+        app.run();
     })?;
 
     let mut event_pump = sdl_context.event_pump()?;
 
     'main: loop {
         match control_rx.try_recv() {
-            Ok(GameControl::Shutdown) | Err(TryRecvError::Disconnected) => break 'main,
+            Ok(AppControl::Shutdown) | Err(TryRecvError::Disconnected) => break 'main,
             Err(TryRecvError::Empty) => {}
         }
         for sdl_event in event_pump.poll_iter() {

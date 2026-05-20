@@ -1,8 +1,20 @@
 [package]
-name = "occ-render"
+name = "occ-render-vk"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
 [dependencies]
+ash.workspace = true
+ash-window.workspace = true
+anyhow.workspace = true
+bytemuck.workspace = true
+glam.workspace = true
+gltf.workspace = true
+ktx2.workspace = true
+log.workspace = true
+raw-window-handle.workspace = true
+thiserror.workspace = true
+vk-mem.workspace = true
+occ-common.workspace = true
